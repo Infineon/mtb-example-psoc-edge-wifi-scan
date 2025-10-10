@@ -10,7 +10,7 @@ This code example has a three project structure: CM33 secure, CM33 non-secure, a
 
 [View this README on GitHub.](https://github.com/Infineon/mtb-example-psoc-edge-wifi-scan)
 
-[Provide feedback on this code example.](https://cypress.co1.qualtrics.com/jfe/form/SV_1NTns53sK2yiljn?Q_EED=eyJVbmlxdWUgRG9jIElkIjoiQ0UyMzk1MTIiLCJTcGVjIE51bWJlciI6IjAwMi0zOTUxMiIsIkRvYyBUaXRsZSI6IlBTT0MmdHJhZGU7IEVkZ2UgTUNVOiBXaS1GaSBzY2FuIiwicmlkIjoicmFtYWtyaXNobmFwIiwiRG9jIHZlcnNpb24iOiIyLjAuMCIsIkRvYyBMYW5ndWFnZSI6IkVuZ2xpc2giLCJEb2MgRGl2aXNpb24iOiJNQ0QiLCJEb2MgQlUiOiJJQ1ciLCJEb2MgRmFtaWx5IjoiUFNPQyJ9)
+[Provide feedback on this code example.](https://cypress.co1.qualtrics.com/jfe/form/SV_1NTns53sK2yiljn?Q_EED=eyJVbmlxdWUgRG9jIElkIjoiQ0UyMzk1MTIiLCJTcGVjIE51bWJlciI6IjAwMi0zOTUxMiIsIkRvYyBUaXRsZSI6IlBTT0MmdHJhZGU7IEVkZ2UgTUNVOiBXaS1GaSBzY2FuIiwicmlkIjoicmFtYWtyaXNobmFwIiwiRG9jIHZlcnNpb24iOiIyLjEuMCIsIkRvYyBMYW5ndWFnZSI6IkVuZ2xpc2giLCJEb2MgRGl2aXNpb24iOiJNQ0QiLCJEb2MgQlUiOiJJQ1ciLCJEb2MgRmFtaWx5IjoiUFNPQyJ9)
 
 See the [Design and implementation](docs/design_and_implementation.md) for the functional description of this code example.
 
@@ -35,6 +35,7 @@ See the [Design and implementation](docs/design_and_implementation.md) for the f
 
 - [PSOC&trade; Edge E84 Evaluation Kit](https://www.infineon.com/KIT_PSE84_EVAL) (`KIT_PSE84_EVAL_EPC2`) – Default value of `TARGET`
 - [PSOC&trade; Edge E84 Evaluation Kit](https://www.infineon.com/KIT_PSE84_EVAL) (`KIT_PSE84_EVAL_EPC4`)
+- [PSOC&trade; Edge E84 AI Kit](https://www.infineon.com/KIT_PSE84_AI) (`KIT_PSE84_AI`)
 
 
 ## Hardware setup
@@ -45,6 +46,7 @@ Ensure the following jumper and pin configuration on board.
 - BOOT SW must be in the HIGH/ON position
 - J20 and J21 must be in the tristate/not connected (NC) position
 
+> **Note:** This hardware setup is not required for KIT_PSE84_AI.
 
 ## Software setup
 
@@ -71,7 +73,7 @@ See [Using the code example](docs/using_the_code_example.md) for instructions on
 
    ![](images/output-1.png)
 
-5. Press the **USER BTN1 (SW2)** to switch to the *SSID scan filter*, which scans only for the network whose SSID is provided in `SCAN_FOR_SSID_VALUE` <br>
+5. Press the **USER BTN1** to switch to the *SSID scan filter*, which scans only for the network whose SSID is provided in `SCAN_FOR_SSID_VALUE` <br>
    
    **Figure 2** shows the output when `SCAN_FOR_SSID_VALUE` is populated with value `MY_WIFI_SSID`
 
@@ -79,7 +81,7 @@ See [Using the code example](docs/using_the_code_example.md) for instructions on
 
    ![](images/output-2.png)
 
-6. Press the **USER BTN1 (SW2)** to switch to the *MAC address scan filter*, which scans only for the network whose MAC address is provided in `SCAN_FOR_MAC_ADDRESS` <br>
+6. Press the **USER BTN1** to switch to the *MAC address scan filter*, which scans only for the network whose MAC address is provided in `SCAN_FOR_MAC_ADDRESS` <br>
 
    **Figure** 3 shows the output when `SCAN_FOR_MAC_ADDRESS` is populated with `5A:CF:20:AE:90:52`
 
@@ -87,7 +89,7 @@ See [Using the code example](docs/using_the_code_example.md) for instructions on
 
    ![](images/output-3.png)
 
-7. Press the **USER BTN1 (SW2)** again to switch to the *ISM band scan filter*, which scans only for the networks that advertise in the frequency band provided in `SCAN_FOR_BAND_VALUE` <br>
+7. Press the **USER BTN1** again to switch to the *ISM band scan filter*, which scans only for the networks that advertise in the frequency band provided in `SCAN_FOR_BAND_VALUE` <br>
 
    **Figure 4** shows the output when `SCAN_FOR_BAND_VALUE` is populated with value `CY_WCM_WIFI_BAND_ANY`
 
@@ -95,7 +97,7 @@ See [Using the code example](docs/using_the_code_example.md) for instructions on
 
    ![](images/output-4.png)
 
-8. Press the **USER BTN1 (SW2)** again to switch to the *RSSI range scan filter*, which scans only for the networks whose RSSI is better than the RSSI provided in `SCAN_FOR_RSSI_VALUE` <br>
+8. Press the **USER BTN1** again to switch to the *RSSI range scan filter*, which scans only for the networks whose RSSI is better than the RSSI provided in `SCAN_FOR_RSSI_VALUE` <br>
 
    **Figure 5** shows the output when `SCAN_FOR_RSSI_VALUE` is populated with `CY_WCM_SCAN_RSSI_FAIR`
 
@@ -103,7 +105,7 @@ See [Using the code example](docs/using_the_code_example.md) for instructions on
 
    ![](images/output-5.png)
 
-9. Press the **USER BTN1 (SW2)** again to wrap around to scan with no filter
+9. Press the **USER BTN1** again to wrap around to scan with no filter
 
 
 ### Wi-Fi throughput
@@ -138,6 +140,7 @@ Document title: *CE239512* – *PSOC&trade; Edge MCU: Wi-Fi scan*
  ------- | ---------------------
  1.x.0   | New code example <br> Early access release
  2.0.0   | GitHub release
+ 2.1.0   | Added support for KIT_PSE84_AI
 <br>
 
 

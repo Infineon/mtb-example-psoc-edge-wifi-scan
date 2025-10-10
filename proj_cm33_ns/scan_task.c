@@ -238,15 +238,17 @@ static void button_interrupt_handler(void)
     Cy_GPIO_ClearInterrupt(CYBSP_USER_BTN1_PORT, CYBSP_USER_BTN1_PIN);
     NVIC_ClearPendingIRQ(CYBSP_USER_BTN1_IRQ);
 
-    /* CYBSP_USER_BTN1 (SW2) and CYBSP_USER_BTN2 (SW4) share the same port and
-     * hence they share the same NVIC IRQ line. Since both the buttons are
-     * configured for falling edge interrupt in the BSP, pressing any button
-     * will trigger the execution of this ISR. Therefore, we must clear the
-     * interrupt flag of the user button (CYBSP_USER_BTN2) to avoid issues in
-     * case if user presses BTN2 by mistake.
+    /* CYBSP_USER_BTN1 (SW2) and CYBSP_USER_BTN2 (SW4) share the same port in
+     * the PSOC™ Edge E84 evaluation kit and hence they share the same NVIC IRQ
+     * line. Since both the buttons are configured for falling edge interrupt in
+     * the BSP, pressing any button will trigger the execution of this ISR. Therefore,
+     * we must clear the interrupt flag of the user button (CYBSP_USER_BTN2) to avoid
+     * issues in case if user presses BTN2 by mistake.
      */
+    #ifdef CYBSP_USER_BTN2_ENABLED
     Cy_GPIO_ClearInterrupt(CYBSP_USER_BTN2_PORT, CYBSP_USER_BTN2_PIN);
     NVIC_ClearPendingIRQ(CYBSP_USER_BTN2_IRQ);
+    #endif
 }
 
 /*******************************************************************************
@@ -274,16 +276,19 @@ void user_button_init(void)
         .intrPriority = BTN1_INTERRUPT_PRIORITY
     };
 
-    /* CYBSP_USER_BTN1 (SW2) and CYBSP_USER_BTN2 (SW4) share the same port and
-    * hence they share the same NVIC IRQ line. Since both are configured in the BSP
-    * via the Device Configurator, the interrupt flags for both the buttons are set
-    * right after they get initialized through the call to cybsp_init(). The flags
-    * must be cleared otherwise the interrupt line will be constantly asserted.
+    /* CYBSP_USER_BTN1 (SW2) and CYBSP_USER_BTN2 (SW4) share the same port in the
+    * PSOC™ Edge E84 evaluation kit and hence they share the same NVIC IRQ line.
+    * Since both are configured in the BSP via the Device Configurator, the
+    * interrupt flags for both the buttons are set right after they get initialized
+    * through the call to cybsp_init(). The flags must be cleared before initializing
+    * the interrupt, otherwise the interrupt line will be constantly asserted.
     */
     Cy_GPIO_ClearInterrupt(CYBSP_USER_BTN1_PORT,CYBSP_USER_BTN1_PIN);
-    Cy_GPIO_ClearInterrupt(CYBSP_USER_BTN2_PORT,CYBSP_USER_BTN2_PIN);
     NVIC_ClearPendingIRQ(CYBSP_USER_BTN1_IRQ);
+    #ifdef CYBSP_USER_BTN2_ENABLED
+    Cy_GPIO_ClearInterrupt(CYBSP_USER_BTN2_PORT,CYBSP_USER_BTN2_PIN);
     NVIC_ClearPendingIRQ(CYBSP_USER_BTN2_IRQ);
+    #endif
 
     /* Initialize the interrupt and register interrupt callback */
     btn_interrupt_init_status = Cy_SysInt_Init(&intrCfg, &button_interrupt_handler);
